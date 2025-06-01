@@ -1,0 +1,30 @@
+apiVersion: skaffold/v1beta15
+kind: Config
+#build:
+#  tagPolicy:
+#    sha256: {}
+#  artifacts:
+#    - image: e2e-developer-backend-0.0.1
+#      context: .
+#      jib: {
+#        args: ["-DskipTests=true"],
+#        project: "e2e-developer-backend",
+#      }
+build:
+  local:
+    push: false
+  artifacts:
+    - image: e2e-developer-backend
+      context: .
+      docker:
+        dockerfile: Dockerfile
+
+deploy:
+  kubectl:
+    manifests:
+      - ./k8s/**.yaml
+profiles:
+  - name: dockerfile
+    build:
+      artifacts:
+        - image: e2e-developer-backend

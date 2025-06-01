@@ -1,0 +1,9 @@
+helm install grafana grafana/grafana --namespace observability --set adminPassword='admin' --set service.type=NodePort --set datasources."datasources\.yaml".apiVersion=1 --set datasources."datasources\.yaml".datasources[0].name=Tempo --set datasources."datasources\.yaml".datasources[0].type=tempo --set datasources."datasources\.yaml".datasources[0].url=http://tempo:3100 --set datasources."datasources\.yaml".datasources[0].access=proxy  --set datasources."datasources\.yaml".datasources[0].isDefault=true
+
+
+
+helm install tempo grafana/tempo --namespace observability --set server.logLevel=debug --set storage.trace.backend=local --set storage.trace.local.path=/tmp/tempo  --set tempo.metricsGenerator.enabled=true
+
+
+apk add netcat-openbsd
+nc -zv otel-collector 4317

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.uk</groupId>
-	<artifactId>api</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>api</name>
+	<artifactId>e2e-developer-backend</artifactId>
+	<version>0.0.1</version>
+	<name>e2e-developer-backend</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -28,8 +28,25 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<dockerRepository>registry.gitlab.com/mamin111/e2e-developer/</dockerRepository>
+		<image>${dockerRepository}${project.artifactId}:${project.version}</image>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-api</artifactId>
+			<version>1.50.0</version>
+		</dependency>
+		<dependency>
+			<groupId>io.opentelemetry</groupId>
+			<artifactId>opentelemetry-sdk</artifactId>
+			<version>1.50.0</version>
+		</dependency>
+
+		<!--		<dependency>-->
+<!--			<groupId>io.opentelemetry</groupId>-->
+<!--			<artifactId>{{artifact-id}}</artifactId>-->
+<!--		</dependency>-->
 		<!-- <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jdbc</artifactId>
@@ -75,6 +92,31 @@
 
 	<build>
 		<plugins>
+<!--			<plugin>-->
+<!--				<groupId>com.google.cloud.tools</groupId>-->
+<!--				<artifactId>jib-maven-plugin</artifactId>-->
+<!--				<version>2.2.0</version>-->
+<!--				<configuration>-->
+<!--					<to>-->
+<!--						<image>${image}</image>-->
+<!--					</to>-->
+<!--					<allowInsecureRegistries>true</allowInsecureRegistries>-->
+<!--					<container>-->
+<!--						<creationTime>USE_CURRENT_TIMESTAMP</creationTime>-->
+<!--					</container>-->
+<!--				</configuration>-->
+<!--			</plugin>-->
+			<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+				<artifactId>jib-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<configuration>
+					<from>
+						<image>adoptopenjdk/openjdk11:alpine-jre</image>
+					</from>
+				</configuration>
+			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
